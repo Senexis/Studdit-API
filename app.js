@@ -5,11 +5,15 @@ const config = require('./config');
 const routes = require('./routes/routes');
 
 const app = express();
-const mongodbUri = 'mongodb://@ds117164.mlab.com:17164/studdit_db';
+const mongodbUrl = 'mongodb://@ds117164.mlab.com:17164/studdit_db';
 
 mongoose.Promise = global.Promise;
-mongoose.connect(mongodbUri, {
-	useNewUrlParser: true
+mongoose.connect(mongodbUrl, {
+	useNewUrlParser: true,
+	auth: {
+		user: config.userName,
+		password: config.pwd
+	  }
 });
 
 var conn = mongoose.connection;

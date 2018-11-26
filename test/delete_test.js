@@ -1,5 +1,5 @@
 const assert = require('assert');
-const User = require('../src/user');
+const User = require('../models/user');
 
 describe('Deleting a user', () => {
   let joe;

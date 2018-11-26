@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const User = require('../src/user');
-const Comment = require('../src/comment');
-const Thread = require('../src/thread');
+const User = require('../models/user');
+const Comment = require('../models/comment');
+const Thread = require('../models/thread');
 
 describe('Assocations', () => {
   let joe, thread, comment;

@@ -12,6 +12,7 @@
     "express": "^4.16.4",
     "mocha": "^5.2.0",
     "mongoose": "^5.3.13",
+    "neo4j-driver": "^1.7.2",
     "nodemon": "^1.11.0"
   }
 }

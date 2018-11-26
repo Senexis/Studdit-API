@@ -4,13 +4,14 @@
   "description": "#NoSQLBois",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js", 
+    "start": "node app.js",
     "test": "mocha --watch",
     "startmon": "nodemon ."
   },
   "author": "Timo Viveen, Wouter Jansen",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "mocha": "^5.2.0",
     "mongoose": "^5.3.13",

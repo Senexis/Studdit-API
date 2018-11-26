@@ -1,8 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const config = require('./config');
+require('dotenv').config();
 const routes = require('./routes/routes');
+
+console.log(process.env.dbUsername);
+console.log(process.env.pwd);
 
 const app = express();
 const mongodbUrl = 'mongodb://@ds117164.mlab.com:17164/studdit_db';
@@ -11,8 +14,8 @@ mongoose.Promise = global.Promise;
 mongoose.connect(mongodbUrl, {
 	useNewUrlParser: true,
 	auth: {
-		user: config.userName,
-		password: config.pwd
+		user: process.env.dbUsername,
+		password: process.env.pwd
 	  }
 });
 

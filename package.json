@@ -1,0 +1,15 @@
+{
+  "name": "nosqlbois",
+  "version": "0.1.0",
+  "description": "\"# NoSQLBois\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --watch"
+  },
+  "author": "Timo Viveen, Wouter Jansen",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^5.2.0",
+    "mongoose": "^5.3.13"
+  }
+}

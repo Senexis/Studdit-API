@@ -2,8 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ThreadSchema = new Schema({
-  title: String,
-  content: String,
+  title: {
+    type: String,
+    required: [true, 'Title is required.']
+  },
+  content: {
+    type: String,
+    required: [true, 'Content is required.']
+  },
   comments: [{
     type: Schema.Types.ObjectId,
     ref: 'comment'

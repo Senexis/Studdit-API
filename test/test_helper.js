@@ -5,25 +5,24 @@ const config = require('../config');
 mongoose.Promise = global.Promise;
 
 before((done) => {
-    //var mongodbUrl ='mongodb://localhost/users-test'; // Local enviroment
-    var mongodbUrl ='mongodb://@ds117164.mlab.com:17164/studdit_db'; //Live DB link
+  var mongodbUrl = 'mongodb://localhost/users-test'; // Local enviroment
+  // var mongodbUrl ='mongodb://@ds117164.mlab.com:17164/studdit_db'; //Live DB link
 
-    mongoose.connect(mongodbUrl, {
-    	useNewUrlParser: true, 
-        auth: {
-            user: config.userName,
-            password: config.pwd
-        }
-    });
+  mongoose.connect(mongodbUrl, {
+    useNewUrlParser: true,
+    // auth: {
+    //   user: config.userName,
+    //   password: config.pwd
+    // }
+  });
 
-    var conn = mongoose.connection;
-    conn.on('error', console.error.bind(console, 'MongoDB connection error:'));  
- 
-    conn.once('open', () =>{
-        console.log('connected to database') 
-        done();                      
-    });
-});
+  var conn = mongoose.connection;
+  conn.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+  conn.once('open', () => {
+    console.log('MongoDB connected.')
+    done();
+  });
 
 /*
 beforeEach((done) => {
@@ -35,5 +34,6 @@ beforeEach((done) => {
       });
     });
   });
+});
 });
 */

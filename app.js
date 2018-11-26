@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const config = require('./config');
+require('dotenv').config();
 const routes = require('./routes/routes');
 
 const app = express();
@@ -11,8 +11,8 @@ mongoose.Promise = global.Promise;
 mongoose.connect(mongodbUrl, {
 	useNewUrlParser: true,
 	auth: {
-		user: config.userName,
-		password: config.pwd
+		user: process.env.dbUsername,
+		password: process.env.pwd
 	  }
 });
 

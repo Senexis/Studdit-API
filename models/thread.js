@@ -7,9 +7,25 @@ const ThreadSchema = new Schema({
   comments: [{
     type: Schema.Types.ObjectId,
     ref: 'comment'
-  }]
+  }],
+  upvotes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'user'
+  }],
+  downvotes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'user'
+  }],
 });
 
-const Thread = mongoose.model('blogPost', ThreadSchema);
+UserSchema.virtual('upvotesCount').get(function () {
+  return this.upvotes.length;
+});
+
+UserSchema.virtual('downvotesCount').get(function () {
+  return this.downvotes.length;
+});
+
+const Thread = mongoose.model('thread', ThreadSchema);
 
 module.exports = Thread;

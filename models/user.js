@@ -1,3 +1,5 @@
+// TODO: Do it in 4J.
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -13,12 +15,8 @@ const UserSchema = new Schema({
   likes: Number,
   threads: [{
     type: Schema.Types.ObjectId,
-    ref: 'blogPost'
+    ref: 'thread'
   }]
-});
-
-UserSchema.virtual('postCount').get(function() {
-  return this.posts.length;
 });
 
 const User = mongoose.model('user', UserSchema);

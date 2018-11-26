@@ -18,11 +18,11 @@ const ThreadSchema = new Schema({
   }],
 });
 
-UserSchema.virtual('upvotesCount').get(function () {
+ThreadSchema.virtual('upvotesCount').get(function () {
   return this.upvotes.length;
 });
 
-UserSchema.virtual('downvotesCount').get(function () {
+ThreadSchema.virtual('downvotesCount').get(function () {
   return this.downvotes.length;
 });
 

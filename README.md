@@ -1,3 +1,3 @@
-"# NoSQLBois" 
+"# NoSQL Bois" 
 
 # Online forum 

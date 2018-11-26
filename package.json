@@ -4,7 +4,7 @@
   "description": "#NoSQLBois",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec 'mocha'"
+    "test": "mocha --watch"
   },
   "author": "Timo Viveen, Wouter Jansen",
   "license": "ISC",

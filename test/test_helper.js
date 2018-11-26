@@ -23,15 +23,17 @@ before((done) => {
     console.log('MongoDB connected.')
     done();
   });
-});
 
+/*
 beforeEach((done) => {
-  const { users, comments, threads } = mongoose.connection.collections;
+  const { users, comments, blogposts } = mongoose.connection.collections;
   users.drop(() => {
     comments.drop(() => {
-      threads.drop(() => {
+      blogposts.drop(() => {
         done();
       });
     });
   });
 });
+});
+*/

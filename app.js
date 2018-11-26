@@ -4,9 +4,6 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 const routes = require('./routes/routes');
 
-console.log(process.env.dbUsername);
-console.log(process.env.pwd);
-
 const app = express();
 const mongodbUrl = 'mongodb://@ds117164.mlab.com:17164/studdit_db';
 

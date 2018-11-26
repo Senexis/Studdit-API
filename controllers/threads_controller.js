@@ -1,4 +1,4 @@
-const Thread = require('../models/Thread');
+const Thread = require('../models/thread');
 
 module.exports = {
     index(req, res, next) {

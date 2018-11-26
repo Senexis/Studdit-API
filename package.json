@@ -9,6 +9,7 @@
   "author": "Timo Viveen, Wouter Jansen",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.16.4",
     "mocha": "^5.2.0",
     "mongoose": "^5.3.13"
   }

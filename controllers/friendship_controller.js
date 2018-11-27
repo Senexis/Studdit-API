@@ -1,7 +1,7 @@
 const { session, neo4j } = require('../neodb');
 
 module.exports = {
-    newFriendship(req, res, next){
+    create(req, res, next){
       const params = { username: req.body.username, friendName: req.body.friendName}
       console.log(params)
       if(params.username === undefined || params.friendName === undefined) {
@@ -30,7 +30,7 @@ module.exports = {
         .catch(next);
     },
 
-    endFriendship(req, res, next){
+    delete(req, res, next){
         const params = { username: req.body.username, friendName: req.body.friendName}
         console.log(params)
         if(params.username === undefined || params.friendName === undefined) {

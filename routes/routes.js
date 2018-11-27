@@ -2,6 +2,7 @@
 const ThreadsController = require('../controllers/threads_controller');
 const UserController = require('../controllers/user_controller');
 const FriendController = require('../controllers/friendship_controller');
+const CommentController = require('../controllers/comment_controller');
 
 module.exports = (app) => {
     // app.get('*', (req, res) => {
@@ -24,6 +25,11 @@ module.exports = (app) => {
     app.delete('/api/user/:username', UserController.delete);
 
     //Friendship endpoints
-    app.post('/api/friendship', FriendController.newFriendship);
-    app.delete('/api/friendship', FriendController.endFriendship);
+    app.post('/api/friendship', FriendController.create);
+    app.delete('/api/friendship', FriendController.delete);
+
+    //Comment endpoints
+    app.get('/api/comment', ThreadsController.index);
+    app.post('/api/comment', CommentController.create);
+    app.delete('/api/comment', FriendController.delete);
 };

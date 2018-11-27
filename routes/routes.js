@@ -17,6 +17,7 @@ module.exports = (app) => {
 
     //app.get('/api/user', UserController.index);
     app.get('/api/user/:username', UserController.getOne);
-    app.post('/api/newuser', UserController.create);
-
+    app.post('/api/user', UserController.create);
+    app.put('/api/user/updatepwd/:username', UserController.updatePassword);
+    app.delete('/api/user/:username', UserController.delete);
 };

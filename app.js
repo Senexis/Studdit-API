@@ -5,16 +5,16 @@ require('dotenv').config();
 const routes = require('./routes/routes');
 
 const app = express();
-//const mongodbUrl = 'mongodb://localhost/users-test'; // Local enviroment
-const mongodbUrl = 'mongodb://@ds117164.mlab.com:17164/studdit_db'; // live
+const mongodbUrl = 'mongodb://localhost/users-test'; // Local enviroment
+//const mongodbUrl = 'mongodb://@ds117164.mlab.com:17164/studdit_db'; // live
 
 mongoose.Promise = global.Promise;
 mongoose.connect(mongodbUrl, {
 	useNewUrlParser: true,
-	auth: {
-		user: process.env.dbUsername,
-		password: process.env.pwd
-	  }
+	//auth: {
+	//	user: process.env.dbUsername,
+	//	password: process.env.pwd
+	//  }
 });
 var conn = mongoose.connection;
 conn.on('error', console.error.bind(console, 'MongoDB connection error:'));

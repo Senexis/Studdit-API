@@ -3,11 +3,11 @@ const User = require('../models/user');
 const Comment = require('../models/comment');
 const Thread = require('../models/thread');
 
-describe('Assocations', () => {
+describe('Assocations', (done) => {
   let joe, thread, comment;
 
   beforeEach((done) => {
-    joe = new User({ name: 'Joe' });
+    joe = new User({ name: 'Joe', password: 'TestPass' });
     thread = new Thread({ title: 'JS is Great', content: 'Yep it really is' });
     comment = new Comment({ content: 'Congrats on great post' });
 
@@ -26,4 +26,5 @@ describe('Assocations', () => {
         done();
       });
   });
+
 });

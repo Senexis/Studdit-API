@@ -11,7 +11,7 @@ module.exports = {
         session.run('MATCH (u:user {username: $username}), (f:user {username: $friendName}) return u', params)
             .then((result) => {
                 
-                if(result.records[0] === null || result.records[0] === undefined){
+                if(!result.records[0]){
                     console.log("username or friend does not exist");
                     res.status(409).json("username does not exist");
                   } else {
@@ -21,9 +21,9 @@ module.exports = {
 
                         session.run('MATCH (u:user {username: $username}), (f:user {username: $friendName}) CREATE (f)-[:Friendship]-> (u)', params)
                         .then((result) => {
-                            res.status(201).json("User successfully created!");
+                            res.status(201).json("Relationship successfully created!");
                         })
-                        
+
                     })
                   }
             })

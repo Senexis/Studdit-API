@@ -32,7 +32,7 @@ module.exports ={
       }
       session.run('MATCH(u:user { username: $username}) RETURN u', params)
         .then((result) => {
-          if(result.records[0] === null || result.records[0] === undefined){
+          if(!result.records[0]){
             //TODO: Clean up with custom function
             session      
             .run('CREATE (u:user {username: $username, password: $password}) RETURN u', params)

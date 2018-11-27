@@ -15,5 +15,8 @@ module.exports = (app) => {
     app.delete('/api/threads/:id', ThreadsController.delete);
     app.get('/api/threads', ThreadsController.index);
 
-    app.get('/api/user', UserController.index);
+    //app.get('/api/user', UserController.index);
+    app.get('/api/user/:username', UserController.getOne);
+    app.post('/api/newuser', UserController.create);
+
 };

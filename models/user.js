@@ -12,6 +12,10 @@ const UserSchema = new Schema({
     },
     required: [true, 'Name is required.']
   },
+  password: {
+    type: String,
+    required: [true, 'Password is required']
+  },
   likes: Number,
   threads: [{
     type: Schema.Types.ObjectId,

@@ -29,7 +29,8 @@ module.exports = (app) => {
     app.delete('/api/friendships', FriendController.delete);
 
     //Comment endpoints
-    app.get('/api/comments', ThreadsController.index);
+    app.get('/api/comments', CommentController.index);
     app.post('/api/comments', CommentController.create);
-    app.delete('/api/comments', FriendController.delete);
+    app.delete('/api/comments/:id', CommentController.delete);
+    app.post('/api/comments/reply', CommentController.reply);
 };

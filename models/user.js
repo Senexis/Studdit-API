@@ -13,8 +13,7 @@ const UserSchema = new Schema({
     required: [true, 'Name is required.']
   },
   password: {
-    type: String,
-    required: [true, 'Password is required']
+    type: String
   },
   likes: Number,
   threads: [{

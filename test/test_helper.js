@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const config = require('../config');
+require('dotenv').config();
 
 //Reference to ES6 promises
 mongoose.Promise = global.Promise;
 
 before((done) => {
-  var mongodbUrl = 'mongodb://localhost/users-test'; // Local enviroment
-  // var mongodbUrl ='mongodb://@ds117164.mlab.com:17164/studdit_db'; //Live DB link
+  const mongodbUrl = 'mongodb://localhost/users-test' // Local enviroment
+  //var mongodbUrl ='mongodb://@ds117164.mlab.com:17164/studdit_db'; //Live DB link
 
   mongoose.connect(mongodbUrl, {
     useNewUrlParser: true,
@@ -24,17 +24,16 @@ before((done) => {
     done();
   });
 
-/*
-beforeEach((done) => {
-  const { users, comments, blogposts } = mongoose.connection.collections;
-  users.drop(() => {
-    comments.drop(() => {
-      blogposts.drop(() => {
-        done();
+
+  beforeEach((done) => {
+    const { users, comments, threads } = mongoose.connection.collections;
+    users.drop(() => {
+      comments.drop(() => {
+        threads.drop(() => {
+          done();
+        });
       });
     });
   });
 });
-});
-*/
-});
+

@@ -32,7 +32,7 @@ module.exports = {
     delete(req, res, next) {
         const threadId = req.params.id;
 
-        Thread.findByIdAndRemove({
+        Thread.findOneAndDelete({
                 _id: threadId
             })
             .then(thread => res.status(204).send(thread))

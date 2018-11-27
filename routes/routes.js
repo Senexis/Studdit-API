@@ -19,17 +19,17 @@ module.exports = (app) => {
 
     //User endpoints
     //app.get('/api/user', UserController.index);
-    app.get('/api/user/:username', UserController.getOne);
-    app.post('/api/user', UserController.create);
-    app.put('/api/user/updatepwd/:username', UserController.updatePassword);
-    app.delete('/api/user/:username', UserController.delete);
+    app.get('/api/users/:username', UserController.getOne);
+    app.post('/api/users', UserController.create);
+    app.put('/api/users/updatepwd/:username', UserController.updatePassword);
+    app.delete('/api/users/:username', UserController.delete);
 
     //Friendship endpoints
-    app.post('/api/friendship', FriendController.create);
-    app.delete('/api/friendship', FriendController.delete);
+    app.post('/api/friendships', FriendController.create);
+    app.delete('/api/friendships', FriendController.delete);
 
     //Comment endpoints
-    app.get('/api/comment', ThreadsController.index);
-    app.post('/api/comment', CommentController.create);
-    app.delete('/api/comment', FriendController.delete);
+    app.get('/api/comments', ThreadsController.index);
+    app.post('/api/comments', CommentController.create);
+    app.delete('/api/comments', FriendController.delete);
 };

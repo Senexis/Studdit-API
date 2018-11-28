@@ -60,8 +60,14 @@ module.exports = {
         Thread.findById(threadId)
             .orFail(() => Error('Not found'))
             .then(() => Comment.create(commentProps))
-            .then(comment => { newCommentId = comment._id; })
-            .then(() => Thread.findByIdAndUpdate(threadId, { "$push": { comments: newCommentId } }))
+            .then(comment => {
+                newCommentId = comment._id;
+            })
+            .then(() => Thread.findByIdAndUpdate(threadId, {
+                "$push": {
+                    comments: newCommentId
+                }
+            }))
             .then(() => res.status(200).send('Success'))
             .catch(next);
     },

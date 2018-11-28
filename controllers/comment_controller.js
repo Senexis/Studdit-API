@@ -56,7 +56,6 @@ module.exports = {
             content: req.body.content
         };
 
-        let threadId;
         let newCommentId;
 
         Comment.findById(commentId)

@@ -1,4 +1,7 @@
-const { session, neo4j } = require('../neodb');
+const {
+    session,
+    neo4j
+} = require('../neodb');
 
 module.exports = {
     index(req, res, next) {
@@ -17,7 +20,7 @@ module.exports = {
         if (params.username === undefined || params.password === undefined) {
             res.status(409).json("Please enter a Username & Password");
         }
-        
+
         session.run('MATCH(u:user { username: $username}) RETURN u', params)
             .then((result) => {
                 if (!result.records[0]) {
@@ -36,7 +39,9 @@ module.exports = {
     },
 
     read(req, res, next) {
-        const params = { username: req.params.username }
+        const params = {
+            username: req.params.username
+        }
 
         session.run('MATCH(u:user { username: $username}) RETURN u', params)
             .then(result => res.send(result.records))
@@ -64,7 +69,9 @@ module.exports = {
 
     //TODO: Fix expected paramters error 
     delete(req, res, next) {
-        const params = { username: req.params.username }
+        const params = {
+            username: req.params.username
+        }
 
         session.run('MATCH(u:user { username: $username }) DETACH DELETE u')
             .then(result => res.status(204).send(result))

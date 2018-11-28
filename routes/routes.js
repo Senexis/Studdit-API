@@ -23,6 +23,8 @@ module.exports = (app) => {
     app.delete('/api/comments/:id', CommentController.delete);
     app.get('/api/comments/:id/comments', CommentController.replies);
     app.post('/api/comments/:id/comments', CommentController.reply);
+    app.post('/api/comments/:id/upvotes', ThreadsController.upvote);
+    app.post('/api/comments/:id/downvotes', ThreadsController.downvote);
 
     // User endpoints
     app.get('/api/users', UserController.index);

@@ -1,6 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+var schemaOptions = {
+  toObject: {
+      virtuals: true
+  },
+  toJSON: {
+      virtuals: true
+  }
+};
+
 const CommentSchema = new Schema({
   user: {
     type: String,
@@ -18,7 +27,23 @@ const CommentSchema = new Schema({
   replies: [{
     type: Schema.Types.ObjectId,
     ref: 'comment'
-  }]
+  }],
+  upvotes: [{
+    type: String,
+    required: [true, 'User is required.']
+  }],
+  downvotes: [{
+    type: String,
+    required: [true, 'User is required.']
+  }],
+}, schemaOptions);
+
+CommentSchema.virtual('upvotesCount').get(function () {
+  return this.upvotes.length;
+});
+
+CommentSchema.virtual('downvotesCount').get(function () {
+  return this.downvotes.length;
 });
 
 var autoPopulateChildren = function (next) {

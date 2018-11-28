@@ -77,6 +77,62 @@ module.exports = {
             .catch(next);
     },
 
+    upvote(req, res, next) {
+        const commentId = req.params.id;
+        const commentPropUser = req.body.username;
+
+        const conditions = {
+            _id: commentId,
+            'upvotes.username': {
+                $ne: commentPropUser
+            }
+        }
+
+        const update = {
+            $addToSet: {
+                upvotes: commentPropUser
+            },
+            $pull: {
+                downvotes: commentPropUser
+            }
+        }
+
+        // This should error if the document is not found, but this seems to be a bug.
+        // See: https://github.com/Automattic/mongoose/issues/7280
+        Thread.findOneAndUpdate(conditions, update)
+            .orFail(() => Error('Not found'))
+            .then(thread => res.redirect('..'))
+            .catch(next);
+    },
+
+    downvote(req, res, next) {
+        const commentId = req.params.id;
+        const commentPropUser = req.body.username;
+
+        const conditions = {
+            _id: commentId,
+            'downvotes.username': {
+                $ne: commentPropUser
+            }
+        }
+
+        const update = {
+            $addToSet: {
+                downvotes: commentPropUser
+            },
+            $pull: {
+                upvotes: commentPropUser
+            }
+        }
+
+        // This should error if the document is not found, but this seems to be a bug.
+        // See: https://github.com/Automattic/mongoose/issues/7280
+        Comment.findOneAndUpdate(conditions, update)
+            .orFail(() => Error('Not found'))
+            .then(thread => res.redirect('..'))
+            .catch(next);
+    },
+
     delete(req, res, next) {
         const commentId = req.params.id;
 

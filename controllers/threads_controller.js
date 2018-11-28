@@ -1,4 +1,5 @@
 const Thread = require('../models/thread');
+const Comment = require('../models/comment');
 
 module.exports = {
     index(req, res, next) {
@@ -26,7 +27,9 @@ module.exports = {
 
     edit(req, res, next) {
         const threadId = req.params.id;
-        const threadProps = { content: req.body.content };
+        const threadProps = {
+            content: req.body.content
+        };
 
         Thread.findByIdAndUpdate(threadId, threadProps)
             .orFail(() => Error('Not found'))
@@ -34,8 +37,33 @@ module.exports = {
             .catch(next);
     },
 
+    replies(req, res, next) {
+        const threadId = req.params.id;
+
+        Thread.findById(threadId)
+            .populate('comments')
+            .orFail(() => Error('Not found'))
+            .then(thread => res.send(thread))
+            .catch(next);
+    },
+
     reply(req, res, next) {
         const threadId = req.params.id;
+        const commentProps = {
+            user: req.body.user,
+            content: req.body.content
+        };
+
+        let newCommentId;
+
+        // This should error if the document is not found, but this seems to be a bug.
+        // See: https://github.com/Automattic/mongoose/issues/7280
+        Comment.create(commentProps)
+            .then(comment => { newCommentId = comment._id; })
+            .then(() => Thread.findByIdAndUpdate(threadId, { "$push": { comments: newCommentId } }))
+            .orFail(() => Error('Not found'))
+            .then(() => res.redirect('..'))
+            .catch(next);
     },
 
     upvote(req, res, next) {
@@ -44,14 +72,20 @@ module.exports = {
 
         const conditions = {
             _id: threadId,
-            'upvotes.username': { $ne: threadPropUser }
+            'upvotes.username': {
+                $ne: threadPropUser
+            }
         }
-        
+
         const update = {
-            $addToSet: { upvotes: threadPropUser },
-            $pull: { downvotes: threadPropUser }
+            $addToSet: {
+                upvotes: threadPropUser
+            },
+            $pull: {
+                downvotes: threadPropUser
+            }
         }
-        
+
         // This should error if the document is not found, but this seems to be a bug.
         // See: https://github.com/Automattic/mongoose/issues/7280
         Thread.findOneAndUpdate(conditions, update)
@@ -66,14 +100,20 @@ module.exports = {
 
         const conditions = {
             _id: threadId,
-            'downvotes.username': { $ne: threadPropUser }
+            'downvotes.username': {
+                $ne: threadPropUser
+            }
         }
-        
+
         const update = {
-            $addToSet: { downvotes: threadPropUser },
-            $pull: { upvotes: threadPropUser }
+            $addToSet: {
+                downvotes: threadPropUser
+            },
+            $pull: {
+                upvotes: threadPropUser
+            }
         }
-        
+
         // This should error if the document is not found, but this seems to be a bug.
         // See: https://github.com/Automattic/mongoose/issues/7280
         Thread.findOneAndUpdate(conditions, update)

@@ -6,10 +6,10 @@ const CommentSchema = new Schema({
     type: String,
     required: [true, 'Content is required.']
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'user'
-  },
+  // user: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'user'
+  // },
   replies: [{
     type: Schema.Types.ObjectId,
     ref: 'comment'

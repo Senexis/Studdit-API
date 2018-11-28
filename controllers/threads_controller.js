@@ -2,7 +2,7 @@ const Thread = require('../models/thread');
 
 module.exports = {
     index(req, res, next) {
-        Thread
+        Thread.find({})
             .then(threads => res.send(threads))
             .catch(next);
     },
@@ -15,26 +15,39 @@ module.exports = {
             .catch(next)
     },
 
+    read(req, res, next) {
+        const threadId = req.params.id;
+
+        Thread.findById(threadId)
+            .then(thread => res.send(thread))
+            .catch(next);
+    },
+
     edit(req, res, next) {
         const threadId = req.params.id;
         const threadProps = req.body;
 
-        Thread.findByIdAndUpdate({
-                _id: threadId
-            }, threadProps)
-            .then(() => Thread.findById({
-                _id: id
-            }))
+        Thread.findByIdAndUpdate(threadId, threadProps)
             .then(thread => res.send(thread))
             .catch(next);
+    },
+
+    reply(req, res, next) {
+        const threadId = req.params.id;
+    },
+
+    upvote(req, res, next) {
+        const threadId = req.params.id;
+    },
+
+    downvote(req, res, next) {
+        const threadId = req.params.id;
     },
 
     delete(req, res, next) {
         const threadId = req.params.id;
 
-        Thread.findOneAndDelete({
-                _id: threadId
-            })
+        Thread.findByIdAndDelete(threadId)
             .then(thread => res.status(204).send(thread))
             .catch(next);
     }

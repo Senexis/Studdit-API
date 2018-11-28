@@ -1,36 +1,35 @@
-
 const ThreadsController = require('../controllers/threads_controller');
 const UserController = require('../controllers/user_controller');
 const FriendController = require('../controllers/friendship_controller');
 const CommentController = require('../controllers/comment_controller');
 
 module.exports = (app) => {
-    // app.get('*', (req, res) => {
-    //     res.status(200).send({
-    //         message: 'Application is running'
-    //     }).end();
-    // })
-
     // Thread endpoints
-    app.post('/api/threads', ThreadsController.create);
-    app.put('/api/threads/:id', ThreadsController.edit);
-    app.delete('/api/threads/:id', ThreadsController.delete);
     app.get('/api/threads', ThreadsController.index);
+    app.post('/api/threads', ThreadsController.create);
+    app.get('/api/threads/:id', ThreadsController.read);
+    app.put('/api/threads/:id', ThreadsController.edit);
+    app.post('/api/threads/:id', ThreadsController.reply);
+    app.post('/api/threads/:id/upvote', ThreadsController.upvote);
+    app.post('/api/threads/:id/downvote', ThreadsController.downvote);
+    app.delete('/api/threads/:id', ThreadsController.delete);
 
-    //User endpoints
-    //app.get('/api/user', UserController.index);
-    app.get('/api/users/:username', UserController.getOne);
-    app.post('/api/users', UserController.create);
-    app.put('/api/users/updatepwd/:username', UserController.updatePassword);
-    app.delete('/api/users/:username', UserController.delete);
-
-    //Friendship endpoints
-    app.post('/api/friendships', FriendController.create);
-    app.delete('/api/friendships', FriendController.delete);
-
-    //Comment endpoints
+    // Comment endpoints
     app.get('/api/comments', CommentController.index);
     app.post('/api/comments', CommentController.create);
+    app.get('/api/comments/:id', UserController.read);
+    app.put('/api/comments/:id', UserController.edit);
+    app.post('/api/comments/:id', CommentController.reply);
     app.delete('/api/comments/:id', CommentController.delete);
-    app.post('/api/comments/reply', CommentController.reply);
+
+    // User endpoints
+    app.get('/api/users', UserController.index);
+    app.post('/api/users', UserController.create);
+    app.get('/api/users/:username', UserController.read);
+    app.put('/api/users/:username', UserController.edit);
+    app.delete('/api/users/:username', UserController.delete);
+
+    // Friendship endpoints
+    app.post('/api/friendships', FriendController.create);
+    app.delete('/api/friendships', FriendController.delete);
 };

@@ -10,8 +10,8 @@ module.exports = (app) => {
     app.get('/api/threads/:id', ThreadsController.read);
     app.put('/api/threads/:id', ThreadsController.edit);
     app.post('/api/threads/:id', ThreadsController.reply);
-    app.post('/api/threads/:id/upvote', ThreadsController.upvote);
-    app.post('/api/threads/:id/downvote', ThreadsController.downvote);
+    app.post('/api/threads/:id/upvotes', ThreadsController.upvote);
+    app.post('/api/threads/:id/downvotes', ThreadsController.downvote);
     app.delete('/api/threads/:id', ThreadsController.delete);
 
     // Comment endpoints

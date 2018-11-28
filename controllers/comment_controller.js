@@ -22,6 +22,7 @@ module.exports = {
         const commentId = req.params.id;
 
         Comment.findById(commentId)
+            .orFail(() => Error('Not found'))
             .then(comment => res.send(comment))
             .catch(next);
     },
@@ -31,6 +32,7 @@ module.exports = {
         const commentProps = { content: req.body.content };
 
         Comment.findByIdAndUpdate(commentId, commentProps)
+            .orFail(() => Error('Not found'))
             .then(thread => res.send(thread))
             .catch(next);
     },
@@ -43,6 +45,7 @@ module.exports = {
         const commentId = req.params.id;
 
         Comment.findByIdAndDelete(commentId)
+            .orFail(() => Error('Not found'))
             .then(Comment => res.status(204).send(Comment))
             .catch(next);
     }

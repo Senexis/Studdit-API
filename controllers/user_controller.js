@@ -2,22 +2,9 @@ const { session, neo4j } = require('../neodb');
 
 module.exports = {
     index(req, res, next) {
-        session
-            .run('MERGE (alice:Person {name : {nameParam} }) RETURN alice.name AS name', {
-                nameParam: 'Alice'
-            })
-            .subscribe({
-                onNext: function (record) {
-                    console.log(record.get('name'));
-                    res.status(200).json("Query succeeded");
-                },
-                onCompleted: function () {
-                    session.close();
-                },
-                onError: function (error) {
-                    console.log(error);
-                }
-            })
+        session.run('MATCH(u) RETURN u')
+            .then(result => res.send(result.records))
+            .catch(next);
     },
 
     create(req, res, next) {
@@ -26,9 +13,11 @@ module.exports = {
             username: req.body.username,
             password: req.body.password
         }
+
         if (params.username === undefined || params.password === undefined) {
             res.status(409).json("Please enter a Username & Password");
         }
+        
         session.run('MATCH(u:user { username: $username}) RETURN u', params)
             .then((result) => {
                 if (!result.records[0]) {
@@ -47,13 +36,10 @@ module.exports = {
     },
 
     read(req, res, next) {
-        const params = {
-            username: req.params.username
-        }
+        const params = { username: req.params.username }
+
         session.run('MATCH(u:user { username: $username}) RETURN u', params)
-            .then((result) => {
-                res.status(201).json(result);
-            })
+            .then(result => res.send(result.records))
             .catch(next);
     },
 
@@ -81,9 +67,7 @@ module.exports = {
         const params = { username: req.params.username }
 
         session.run('MATCH(u:user { username: $username }) DETACH DELETE u')
-            .then((result) => {
-                res.status(200).json()
-            })
+            .then(result => res.status(204).send(result))
             .catch(next);
     }
 };

@@ -52,6 +52,8 @@ module.exports = {
             $pull: { downvotes: threadPropUser }
         }
         
+        // This should error if the document is not found, but this seems to be a bug.
+        // See: https://github.com/Automattic/mongoose/issues/7280
         Thread.findOneAndUpdate(conditions, update)
             .orFail(() => Error('Not found'))
             .then(thread => res.redirect('..'))
@@ -72,6 +74,8 @@ module.exports = {
             $pull: { upvotes: threadPropUser }
         }
         
+        // This should error if the document is not found, but this seems to be a bug.
+        // See: https://github.com/Automattic/mongoose/issues/7280
         Thread.findOneAndUpdate(conditions, update)
             .orFail(() => Error('Not found'))
             .then(thread => res.redirect('..'))

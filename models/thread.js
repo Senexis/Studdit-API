@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Comment = require('./comment');
 
 var schemaOptions = {
     toObject: {
@@ -50,6 +51,12 @@ ThreadSchema.method('toJSON', function() {
     delete thread.upvotes;
     delete thread.downvotes;
     return thread;
+});
+
+ThreadSchema.pre('remove', function(next) {
+    Comment.deleteMany({thread: this._id})
+        .exec()
+        .then(next);
 });
 
 const Thread = mongoose.model('thread', ThreadSchema);

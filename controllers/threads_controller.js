@@ -57,7 +57,7 @@ module.exports = {
 
         let newCommentId;
 
-        Comment.findById(commentId)
+        Thread.findById(threadId)
             .orFail(() => Error('Not found'))
             .then(() => Comment.create(commentProps))
             .then(comment => { newCommentId = comment._id; })

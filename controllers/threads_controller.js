@@ -56,13 +56,12 @@ module.exports = {
 
         let newCommentId;
 
-        // This should error if the document is not found, but this seems to be a bug.
-        // See: https://github.com/Automattic/mongoose/issues/7280
+        // TODO add thread check.
+
         Comment.create(commentProps)
             .then(comment => { newCommentId = comment._id; })
             .then(() => Thread.findByIdAndUpdate(threadId, { "$push": { comments: newCommentId } }))
-            .orFail(() => Error('Not found'))
-            .then(() => res.redirect('..'))
+            .then(() => res.send('Success'))
             .catch(next);
     },
 

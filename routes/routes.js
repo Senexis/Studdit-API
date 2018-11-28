@@ -21,6 +21,7 @@ module.exports = (app) => {
     app.get('/api/comments/:id', UserController.read);
     app.put('/api/comments/:id', UserController.edit);
     app.delete('/api/comments/:id', CommentController.delete);
+    app.get('/api/comments/:id/comments', CommentController.replies);
     app.post('/api/comments/:id/comments', CommentController.reply);
 
     // User endpoints

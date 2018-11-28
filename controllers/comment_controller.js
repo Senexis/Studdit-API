@@ -37,8 +37,32 @@ module.exports = {
             .catch(next);
     },
 
-    reply(req, res, next) {
+    replies(req, res, next) {
+        const commentId = req.params.id;
 
+        Comment.findById(commentId)
+            .populate('replies')
+            .orFail(() => Error('Not found'))
+            .then(thread => res.send(thread))
+            .catch(next);
+    },
+
+    reply(req, res, next) {
+        const commentId = req.params.id;
+        const commentProps = {
+            user: req.body.user,
+            content: req.body.content
+        };
+
+        let newCommentId;
+
+        // TODO add comment check.
+
+        Comment.create(commentProps)
+            .then(comment => { newCommentId = comment._id; })
+            .then(() => Comment.findByIdAndUpdate(commentId, { "$push": { replies: newCommentId } }))
+            .then(() => res.status(200).send('Success'))
+            .catch(next);
     },
 
     delete(req, res, next) {
@@ -46,7 +70,7 @@ module.exports = {
 
         Comment.findByIdAndDelete(commentId)
             .orFail(() => Error('Not found'))
-            .then(Comment => res.status(204).send(Comment))
+            .then(comment => res.status(204).send(comment))
             .catch(next);
     }
 };

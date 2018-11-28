@@ -25,7 +25,7 @@ module.exports = {
 
     edit(req, res, next) {
         const threadId = req.params.id;
-        const threadProps = req.body;
+        const threadProps = { content: req.body.content };
 
         Thread.findByIdAndUpdate(threadId, threadProps)
             .then(thread => res.send(thread))

@@ -1,7 +1,4 @@
-const {
-  session,
-  neo4j
-} = require('../neodb');
+const { session, neo4j } = require('../neodb');
 
 module.exports = {
   index(req, res, next) {

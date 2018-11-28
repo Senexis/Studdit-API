@@ -27,7 +27,12 @@ module.exports = {
     },
 
     edit(req, res, next) {
+        const commentId = req.params.id;
+        const commentProps = { content: req.body.content };
 
+        Comment.findByIdAndUpdate(commentId, commentProps)
+            .then(thread => res.send(thread))
+            .catch(next);
     },
 
     reply(req, res, next) {

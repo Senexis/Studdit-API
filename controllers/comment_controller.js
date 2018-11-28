@@ -29,7 +29,9 @@ module.exports = {
 
     edit(req, res, next) {
         const commentId = req.params.id;
-        const commentProps = { content: req.body.content };
+        const commentProps = {
+            content: req.body.content
+        };
 
         Comment.findByIdAndUpdate(commentId, commentProps)
             .orFail(() => Error('Not found'))
@@ -49,18 +51,28 @@ module.exports = {
 
     reply(req, res, next) {
         const commentId = req.params.id;
-        const commentProps = {
+        let commentProps = {
             user: req.body.user,
             content: req.body.content
         };
 
+        let threadId;
         let newCommentId;
 
-        // TODO add comment check.
-
-        Comment.create(commentProps)
-            .then(comment => { newCommentId = comment._id; })
-            .then(() => Comment.findByIdAndUpdate(commentId, { "$push": { replies: newCommentId } }))
+        Comment.findById(commentId)
+            .orFail(() => Error('Not found'))
+            .then(comment => {
+                commentProps.thread = comment.thread;
+            })
+            .then(() => Comment.create(commentProps))
+            .then(comment => {
+                newCommentId = comment._id;
+            })
+            .then(() => Comment.findByIdAndUpdate(commentId, {
+                "$push": {
+                    replies: newCommentId
+                }
+            }))
             .then(() => res.status(200).send('Success'))
             .catch(next);
     },

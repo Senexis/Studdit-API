@@ -51,17 +51,18 @@ module.exports = {
         const threadId = req.params.id;
         const commentProps = {
             user: req.body.user,
-            content: req.body.content
+            content: req.body.content,
+            thread: threadId
         };
 
         let newCommentId;
 
-        // TODO add thread check.
-
-        Comment.create(commentProps)
+        Comment.findById(commentId)
+            .orFail(() => Error('Not found'))
+            .then(() => Comment.create(commentProps))
             .then(comment => { newCommentId = comment._id; })
             .then(() => Thread.findByIdAndUpdate(threadId, { "$push": { comments: newCommentId } }))
-            .then(() => res.send('Success'))
+            .then(() => res.status(200).send('Success'))
             .catch(next);
     },
 

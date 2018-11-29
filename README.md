@@ -3,7 +3,7 @@
 # Links
  - Heroku: https://mighty-salt-32273.herokuapp.com/
 
- #Endpoint list
+ # Endpoint list
  
     ### Thread endpoints
     /api/threads'

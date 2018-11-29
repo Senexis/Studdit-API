@@ -18,7 +18,7 @@ module.exports = {
 
         Comment.findByIdAndUpdate(commentId, commentProps)
             .orFail(() => Error('Not found'))
-            .then(thread => res.send(thread))
+            .then(comment => res.send(comment))
             .catch(next);
     },
 
@@ -28,7 +28,7 @@ module.exports = {
         Comment.findById(commentId)
             .populate('replies')
             .orFail(() => Error('Not found'))
-            .then(thread => res.send(thread))
+            .then(comment => res.send(comment))
             .catch(next);
     },
 

@@ -94,4 +94,4 @@ module.exports = {
                 }
             }).catch(next);
     }
-};
+}; 

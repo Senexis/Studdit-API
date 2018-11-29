@@ -53,7 +53,14 @@ var autoPopulateChildren = function (next) {
 
 CommentSchema
     .pre('findOne', autoPopulateChildren)
-    .pre('find', autoPopulateChildren)
+    .pre('find', autoPopulateChildren);
+
+CommentSchema.method('toJSON', function () {
+    var comment = this.toObject();
+    delete comment.upvotes;
+    delete comment.downvotes;
+    return comment;
+});
 
 const Comment = mongoose.model('comment', CommentSchema);
 

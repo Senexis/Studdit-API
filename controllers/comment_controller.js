@@ -35,7 +35,7 @@ module.exports = {
     reply(req, res, next) {
         const commentId = req.params.id;
         let commentProps = {
-            user: req.body.user,
+            username: req.body.username,
             content: req.body.content
         };
 

@@ -11,12 +11,12 @@ module.exports = {
 
     create(req, res, next) {
         const threadProps = {
-            user: req.body.user,
+            username: req.body.username,
             title: req.body.title,
             content: req.body.content,
         };
 
-        const url = `${req.protocol}://${req.get('Host')}/api/users/${threadProps.user}`;
+        const url = `${req.protocol}://${req.get('Host')}/api/users/${threadProps.username}`;
 
         request.get(url)
             .then((result) => {
@@ -63,7 +63,7 @@ module.exports = {
     reply(req, res, next) {
         const threadId = req.params.id;
         const commentProps = {
-            user: req.body.user,
+            username: req.body.username,
             content: req.body.content,
             thread: threadId
         };

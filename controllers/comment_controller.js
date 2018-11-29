@@ -81,7 +81,7 @@ module.exports = {
 
         // This should error if the document is not found, but this seems to be a bug.
         // See: https://github.com/Automattic/mongoose/issues/7280
-        Thread.findOneAndUpdate(conditions, update)
+        Comment.findOneAndUpdate(conditions, update)
             .orFail(() => Error('Not found'))
             .then(() => res.redirect('..'))
             .catch(next);

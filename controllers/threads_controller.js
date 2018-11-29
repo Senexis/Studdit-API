@@ -15,19 +15,18 @@ module.exports = {
             title: req.body.title,
             content: req.body.content,
         };
-        const url = req.protocol + '://' + req.get('Host');
 
-        request.get(url + "/api/users/" + threadProps.user)
+        const url = `${req.protocol}://${req.get('Host')}/api/users/${threadProps.user}`;
+
+        request.get(url)
             .then((result) => {
-                console.log(result)
-                if(result == []){ console.log("wrong username")}
-                else { console.log("success")}
-            });
-
-        //         //Thread.create(threadProps)
-        //         //    .then(thread => res.send(thread))
-        //         //    .catch(next)
-
+                if (result == []) {
+                    throw new Error('User does not exist.');
+                }
+            })
+            .then(() => Thread.create(threadProps))
+            .then(thread => res.send(thread))
+            .catch(next);
     },
 
     read(req, res, next) {

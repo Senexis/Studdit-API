@@ -16,8 +16,6 @@ module.exports = (app) => {
     app.post('/api/threads/:id/downvotes', ThreadsController.downvote);
 
     // Comment endpoints
-    app.get('/api/comments', CommentController.index);
-    app.post('/api/comments', CommentController.create);
     app.get('/api/comments/:id', UserController.read);
     app.put('/api/comments/:id', UserController.edit);
     app.delete('/api/comments/:id', CommentController.delete);

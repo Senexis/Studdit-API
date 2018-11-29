@@ -1,5 +1,4 @@
 const assert = require('assert');
-const User = require('../models/user');
 
 describe('Reading users out of the database', () => {
   let joe;

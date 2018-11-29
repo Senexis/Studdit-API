@@ -15,13 +15,15 @@ module.exports = {
             username: req.body.username,
             password: req.body.password
         }
-
+        console.log(params);
         if (params.username === undefined || params.password === undefined) {
+            console.log("params if statement")
             res.status(409).json("Please enter a Username & Password");
         }
 
         session.run('MATCH(u:user { username: $username}) RETURN u', params)
             .then((result) => {
+                console.log("in session")
                 if (!result.records[0]) {
                     //TODO: Clean up with custom function
                     session
@@ -87,7 +89,6 @@ module.exports = {
                 else {    
                     session.run('MATCH(u:user { username: $username }) DETACH DELETE u', params)
                         .then((result) => {
-                            console.log("Success")
                             res.status(204).json();
                         })
                         .catch(next);

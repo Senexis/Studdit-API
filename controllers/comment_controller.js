@@ -50,9 +50,12 @@ module.exports = {
                     throw new Error('User does not exist.');
                 }
             })
-            .then(Comment.findById(commentId).orFail(() => Error('Not found')))
-            .then(comment => {
-                commentProps.thread = comment.thread;
+            .then(() => {
+                Comment.findById(commentId)
+                    .orFail(() => Error('Not found'))
+                    .then(comment => {
+                        commentProps.thread = comment.thread;
+                    })
             })
             .then(() => Comment.create(commentProps))
             .then(comment => {

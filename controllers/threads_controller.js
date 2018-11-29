@@ -78,8 +78,7 @@ module.exports = {
                     throw new Error('User does not exist.');
                 }
             })
-            .then(() => Thread.findById(threadId))
-            .orFail(() => Error('Not found'))
+            .then(() => Thread.findById(threadId).orFail(() => Error('Not found')))
             .then(() => Comment.create(commentProps))
             .then(comment => {
                 newCommentId = comment._id;
@@ -123,8 +122,7 @@ module.exports = {
                     throw new Error('User does not exist.');
                 }
             })
-            .then(() => Thread.findOneAndUpdate(conditions, update))
-            .orFail(() => Error('Not found'))
+            .then(() => Thread.findOneAndUpdate(conditions, update).orFail(() => Error('Not found')))
             .then(thread => res.redirect('..'))
             .catch(next);
     },
@@ -159,8 +157,7 @@ module.exports = {
                     throw new Error('User does not exist.');
                 }
             })
-            .then(Thread.findOneAndUpdate(conditions, update))
-            .orFail(() => Error('Not found'))
+            .then(Thread.findOneAndUpdate(conditions, update).orFail(() => Error('Not found')))
             .then(thread => res.redirect('..'))
             .catch(next);
     },

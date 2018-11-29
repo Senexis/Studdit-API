@@ -83,7 +83,7 @@ module.exports = {
         // See: https://github.com/Automattic/mongoose/issues/7280
         Thread.findOneAndUpdate(conditions, update)
             .orFail(() => Error('Not found'))
-            .then(thread => res.redirect('..'))
+            .then(() => res.redirect('..'))
             .catch(next);
     },
 
@@ -111,7 +111,7 @@ module.exports = {
         // See: https://github.com/Automattic/mongoose/issues/7280
         Comment.findOneAndUpdate(conditions, update)
             .orFail(() => Error('Not found'))
-            .then(thread => res.redirect('..'))
+            .then(() => res.redirect('..'))
             .catch(next);
     },
 

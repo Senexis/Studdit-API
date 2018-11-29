@@ -11,7 +11,6 @@ module.exports = {
     },
 
     create(req, res, next) {
-        //TODO: hash password
         const params = {
             username: req.body.username,
             password: req.body.password
@@ -54,7 +53,6 @@ module.exports = {
             password: req.body.password,
             newPassword: req.body.newPassword
         }
-        console.log(params);
         if (params.username === undefined || params.password === undefined || params.newPassword === undefined) {
             res.status(401).json("Please enter all required fields");
         }
@@ -75,14 +73,25 @@ module.exports = {
 
     delete(req, res, next) {
         const params = {
-            username: req.params.username
+            username: req.params.username,
+            password: req.body.password
         }
-
-        session.run('MATCH(u:user { username: $username }) DETACH DELETE u', params)
+        if (params.username === undefined || params.password === undefined) {
+            res.status(401).json("Please enter all required fields");
+        }
+        session.run('MATCH(u:user { username: $username}), (u:user {password: $password}) RETURN u', params)
             .then((result) => {
-                console.log("Success")
-                res.status(204).json();
-            })
-            .catch(next);
+                if(!result.records[0]) {
+                    res.status(401).json("Username or password is incorrect")
+                } 
+                else {    
+                    session.run('MATCH(u:user { username: $username }) DETACH DELETE u', params)
+                        .then((result) => {
+                            console.log("Success")
+                            res.status(204).json();
+                        })
+                        .catch(next);
+                }
+            }).catch(next);
     }
 };

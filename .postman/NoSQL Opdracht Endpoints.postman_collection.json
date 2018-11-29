@@ -42,7 +42,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"title\": \"Test Title\", \"content\": \"Lorem ipsum...\", \"user\": \"test_user\"}"
+					"raw": "{\"title\": \"Test Title\", \"content\": \"Lorem ipsum...\", \"username\": \"test_user\"}"
 				},
 				"url": {
 					"raw": "{{url_base}}/api/threads/",
@@ -200,7 +200,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"content\": \"Lorem ipsum comment...\", \"user\": \"test_user\"}"
+					"raw": "{\"content\": \"Lorem ipsum comment...\", \"username\": \"test_user\"}"
 				},
 				"url": {
 					"raw": "{{url_base}}/api/threads/:id/comments/",
@@ -238,7 +238,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"user\": \"test_user\"}"
+					"raw": "{\"username\": \"test_user\"}"
 				},
 				"url": {
 					"raw": "{{url_base}}/api/threads/:id/upvotes/",
@@ -276,7 +276,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"user\": \"test_user\"}"
+					"raw": "{\"username\": \"test_user\"}"
 				},
 				"url": {
 					"raw": "{{url_base}}/api/threads/:id/downvotes/",
@@ -442,7 +442,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"content\": \"Lorem ipsum comment...\", \"user\": \"test_user\"}"
+					"raw": "{\"content\": \"Lorem ipsum comment...\", \"username\": \"test_user\"}"
 				},
 				"url": {
 					"raw": "{{url_base}}/api/comments/:id/comments/",
@@ -480,7 +480,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"user\": \"test_user\"}"
+					"raw": "{\"username\": \"test_user\"}"
 				},
 				"url": {
 					"raw": "{{url_base}}/api/comments/:id/upvotes/",
@@ -518,7 +518,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"user\": \"test_user\"}"
+					"raw": "{\"username\": \"test_user\"}"
 				},
 				"url": {
 					"raw": "{{url_base}}/api/comments/:id/downvotes/",
@@ -639,7 +639,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"password\": \"4321\"}"
+					"raw": "{\"password\": \"1234\", \"newPassword\": \"4321\"}"
 				},
 				"url": {
 					"raw": "{{url_base}}/api/users/:username/",
@@ -747,9 +747,31 @@
 			"response": []
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "cff589b2-8457-4db5-be5b-06413e4194da",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "867b8aac-5831-4689-87ce-d9c5f650d7b9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"id": "23adba02-5b4a-4c67-a012-6a15c8cbb43f",
+			"id": "c656b5dd-1f52-4b53-a304-0cfedf6d2b1a",
 			"key": "url_base",
 			"value": "https://mighty-salt-32273.herokuapp.com",
 			"type": "string"

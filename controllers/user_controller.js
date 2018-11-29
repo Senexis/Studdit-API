@@ -32,7 +32,7 @@ module.exports = {
                         })
                 } else {
                     console.log("User already exists")
-                    res.status(409).json("Username is already taken");
+                    res.status(401).json("Username is already taken");
                 }
             })
             .catch(next);
@@ -48,7 +48,6 @@ module.exports = {
             .catch(next);
     },
 
-    //TODO: Fix this; password is able to change even when pwd does not match
     edit(req, res, next) {
         const params = {
             username: req.params.username,
@@ -57,12 +56,19 @@ module.exports = {
         }
         console.log(params);
         if (params.username === undefined || params.password === undefined || params.newPassword === undefined) {
-            res.status(409).json("Please enter all required fields");
+            res.status(401).json("Please enter all required fields");
         }
-        session.run('MATCH(u:user { username: $username, password: $password}) SET u.password = $newPassword RETURN u', params)
+        session.run('MATCH(u:user { username: $username}), (u:user {password: $password}) RETURN u', params)
             .then((result) => {
-                console.log("Success")
-                res.status(201).json("Password succesfully updated");
+                if(!result.records[0]) {
+                    res.status(401).json("Username or password is incorrect")
+                } 
+                else {     
+                    session.run('MATCH(u:user { username: $username}), (u:user {password: $password}) SET u.password = $newPassword RETURN u', params)
+                        .then((result) => {  
+                            res.status(201).json(result);
+                        }).catch(next)
+                }  
             })
             .catch(next);
     },

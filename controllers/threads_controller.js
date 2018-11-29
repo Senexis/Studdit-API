@@ -1,5 +1,6 @@
 const Thread = require('../models/thread');
 const Comment = require('../models/comment');
+const request = require('request-promise-native');
 
 module.exports = {
     index(req, res, next) {
@@ -9,11 +10,24 @@ module.exports = {
     },
 
     create(req, res, next) {
-        const threadProps = req.body;
+        const threadProps = {
+            user: req.body.user,
+            title: req.body.title,
+            content: req.body.content,
+        };
+        const url = req.protocol + '://' + req.get('Host');
 
-        Thread.create(threadProps)
-            .then(thread => res.send(thread))
-            .catch(next)
+        request.get(url + "/api/users/" + threadProps.user)
+            .then((result) => {
+                console.log(result)
+                if(result == []){ console.log("wrong username")}
+                else { console.log("success")}
+            });
+
+        //         //Thread.create(threadProps)
+        //         //    .then(thread => res.send(thread))
+        //         //    .catch(next)
+
     },
 
     read(req, res, next) {

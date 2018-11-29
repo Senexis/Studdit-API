@@ -16,6 +16,9 @@
     "mocha": "^5.2.0",
     "mongoose": "^5.3.13",
     "neo4j-driver": "^1.7.2",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5",
+    "supertest": "^3.3.0"
   }
 }

@@ -39,6 +39,8 @@ module.exports = {
     },
 
     read(req, res, next) {
+        console.log("usercontroller read called")
+        console.log(req.params)
         const params = {
             username: req.params.username
         }

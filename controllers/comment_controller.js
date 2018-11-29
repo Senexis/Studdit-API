@@ -56,17 +56,18 @@ module.exports = {
                     .then(comment => {
                         commentProps.thread = comment.thread;
                     })
+                    .then(() => Comment.create(commentProps))
+                    .then(comment => {
+                        newCommentId = comment._id;
+                    })
+                    .then(() => Comment.findByIdAndUpdate(commentId, {
+                        "$push": {
+                            replies: newCommentId
+                        }
+                    }))
+                    .then(() => res.status(200).send('Success'))
+                    .catch(next);
             })
-            .then(() => Comment.create(commentProps))
-            .then(comment => {
-                newCommentId = comment._id;
-            })
-            .then(() => Comment.findByIdAndUpdate(commentId, {
-                "$push": {
-                    replies: newCommentId
-                }
-            }))
-            .then(() => res.status(200).send('Success'))
             .catch(next);
     },
 

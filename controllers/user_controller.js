@@ -67,14 +67,16 @@ module.exports = {
             .catch(next);
     },
 
-    //TODO: Fix expected paramters error 
     delete(req, res, next) {
         const params = {
             username: req.params.username
         }
 
-        session.run('MATCH(u:user { username: $username }) DETACH DELETE u')
-            .then(result => res.status(204).send(result))
+        session.run('MATCH(u:user { username: $username }) DETACH DELETE u', params)
+            .then((result) => {
+                console.log("Success")
+                res.status(204).json();
+            })
             .catch(next);
     }
 };

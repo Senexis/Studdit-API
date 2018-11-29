@@ -22,14 +22,9 @@ module.exports = {
                     res.status(409).json("username does not exist");
                 } else {
                     //A relationship always has a direction. We can create a relationship both ways however.
-                    session.run('MATCH (u:user {username: $username}), (f:user {username: $friendName}) CREATE (u)-[:Friendship]-> (f)', params)
+                    session.run('MATCH (u:user {username: $username}), (f:user {username: $friendName}) MERGE (u)-[:Friends]-(f)', params)
                         .then((result) => {
-
-                            session.run('MATCH (u:user {username: $username}), (f:user {username: $friendName}) CREATE (f)-[:Friendship]-> (u)', params)
-                                .then((result) => {
-                                    res.status(201).json("Relationship successfully created!");
-                                })
-
+                            res.status(201).json("Relationship successfully created!");
                         })
                 }
             })

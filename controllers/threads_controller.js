@@ -20,7 +20,7 @@ module.exports = {
 
         request.get(url)
             .then((result) => {
-                if (result == []) {
+                if (result == "[]") {
                     throw new Error('User does not exist.');
                 }
             })

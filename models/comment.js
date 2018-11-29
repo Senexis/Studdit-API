@@ -11,7 +11,7 @@ var schemaOptions = {
 };
 
 const CommentSchema = new Schema({
-    user: {
+    username: {
         type: String,
         required: [true, 'User is required.']
     },

@@ -12,7 +12,7 @@ var schemaOptions = {
 };
 
 const ThreadSchema = new Schema({
-    user: {
+    username: {
         type: String,
         required: [true, 'User is required.']
     },

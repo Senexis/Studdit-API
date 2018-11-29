@@ -1,0 +1,758 @@
+{
+	"info": {
+		"_postman_id": "78dcdfa0-879e-46cf-9bec-77cac4b6d62e",
+		"name": "NoSQL Opdracht Endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Threads: GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_base}}/api/threads/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"threads",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Threads: CREATE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"Test Title\", \"content\": \"Lorem ipsum...\", \"user\": \"test_user\"}"
+				},
+				"url": {
+					"raw": "{{url_base}}/api/threads/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"threads",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Threads: READ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_base}}/api/threads/:id/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"threads",
+						":id",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Threads: EDIT",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"content\": \"EDIT: Lorem ipsum...\"}"
+				},
+				"url": {
+					"raw": "{{url_base}}/api/threads/:id/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"threads",
+						":id",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Threads: DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_base}}/api/threads/:id/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"threads",
+						":id",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Threads: REPLIES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_base}}/api/threads/:id/comments/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"threads",
+						":id",
+						"comments",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Threads: REPLY",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"content\": \"Lorem ipsum comment...\", \"user\": \"test_user\"}"
+				},
+				"url": {
+					"raw": "{{url_base}}/api/threads/:id/comments/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"threads",
+						":id",
+						"comments",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Threads: UPVOTE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"user\": \"test_user\"}"
+				},
+				"url": {
+					"raw": "{{url_base}}/api/threads/:id/upvotes/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"threads",
+						":id",
+						"upvotes",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Threads: DOWNVOTE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"user\": \"test_user\"}"
+				},
+				"url": {
+					"raw": "{{url_base}}/api/threads/:id/downvotes/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"threads",
+						":id",
+						"downvotes",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments: READ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_base}}/api/comments/:id/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"comments",
+						":id",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments: EDIT",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"content\": \"EDIT: Lorem ipsum...\"}"
+				},
+				"url": {
+					"raw": "{{url_base}}/api/comments/:id/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"comments",
+						":id",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments: DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_base}}/api/comments/:id/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"comments",
+						":id",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments: REPLIES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_base}}/api/comments/:id/comments/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"comments",
+						":id",
+						"comments",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments: REPLY",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"content\": \"Lorem ipsum comment...\", \"user\": \"test_user\"}"
+				},
+				"url": {
+					"raw": "{{url_base}}/api/comments/:id/comments/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"comments",
+						":id",
+						"comments",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments: UPVOTE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"user\": \"test_user\"}"
+				},
+				"url": {
+					"raw": "{{url_base}}/api/comments/:id/upvotes/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"comments",
+						":id",
+						"upvotes",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments: DOWNVOTE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"user\": \"test_user\"}"
+				},
+				"url": {
+					"raw": "{{url_base}}/api/comments/:id/downvotes/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"comments",
+						":id",
+						"downvotes",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users: GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_base}}/api/users/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users: CREATE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"test_user\", \"password\": \"1234\"}"
+				},
+				"url": {
+					"raw": "{{url_base}}/api/users/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users: READ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_base}}/api/users/:username/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"users",
+						":username",
+						""
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users: EDIT",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\": \"4321\"}"
+				},
+				"url": {
+					"raw": "{{url_base}}/api/users/:username/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"users",
+						":username",
+						""
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users: DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_base}}/api/users/:username/",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"users",
+						":username",
+						""
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Friendships: CREATE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"test_user\", \"friendname\": \"test_user_1\"}"
+				},
+				"url": {
+					"raw": "/api/friendships/",
+					"path": [
+						"api",
+						"friendships",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Friendships: DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"test_user\", \"friendname\": \"test_user_1\"}"
+				},
+				"url": {
+					"raw": "/api/friendships/",
+					"path": [
+						"api",
+						"friendships",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "23adba02-5b4a-4c67-a012-6a15c8cbb43f",
+			"key": "url_base",
+			"value": "https://mighty-salt-32273.herokuapp.com",
+			"type": "string"
+		}
+	]
+}

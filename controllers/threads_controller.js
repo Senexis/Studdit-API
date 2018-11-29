@@ -70,8 +70,15 @@ module.exports = {
 
         let newCommentId;
 
-        Thread.findById(threadId)
-            .orFail(() => Error('Not found'))
+        const url = `${req.protocol}://${req.get('Host')}/api/users/${commentProps.username}`;
+
+        request.get(url)
+            .then((result) => {
+                if (result == "[]") {
+                    throw new Error('User does not exist.');
+                }
+            })
+            .then(() => Thread.findById(threadId).orFail(() => Error('Not found')))
             .then(() => Comment.create(commentProps))
             .then(comment => {
                 newCommentId = comment._id;
@@ -107,8 +114,15 @@ module.exports = {
 
         // This should error if the document is not found, but this seems to be a bug.
         // See: https://github.com/Automattic/mongoose/issues/7280
-        Thread.findOneAndUpdate(conditions, update)
-            .orFail(() => Error('Not found'))
+        const url = `${req.protocol}://${req.get('Host')}/api/users/${threadPropUser}`;
+
+        request.get(url)
+            .then((result) => {
+                if (result == "[]") {
+                    throw new Error('User does not exist.');
+                }
+            })
+            .then(() => Thread.findOneAndUpdate(conditions, update).orFail(() => Error('Not found')))
             .then(thread => res.redirect('..'))
             .catch(next);
     },
@@ -135,8 +149,15 @@ module.exports = {
 
         // This should error if the document is not found, but this seems to be a bug.
         // See: https://github.com/Automattic/mongoose/issues/7280
-        Thread.findOneAndUpdate(conditions, update)
-            .orFail(() => Error('Not found'))
+        const url = `${req.protocol}://${req.get('Host')}/api/users/${threadPropUser}`;
+
+        request.get(url)
+            .then((result) => {
+                if (result == "[]") {
+                    throw new Error('User does not exist.');
+                }
+            })
+            .then(Thread.findOneAndUpdate(conditions, update).orFail(() => Error('Not found')))
             .then(thread => res.redirect('..'))
             .catch(next);
     },

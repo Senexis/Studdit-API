@@ -1,4 +1,5 @@
 const Comment = require('../models/comment');
+const request = require('request-promise-native');
 
 module.exports = {
     read(req, res, next) {
@@ -41,10 +42,20 @@ module.exports = {
 
         let newCommentId;
 
-        Comment.findById(commentId)
-            .orFail(() => Error('Not found'))
-            .then(comment => {
-                commentProps.thread = comment.thread;
+        const url = `${req.protocol}://${req.get('Host')}/api/users/${commentProps.username}`;
+
+        request.get(url)
+            .then((result) => {
+                if (result == "[]") {
+                    throw new Error('User does not exist.');
+                }
+            })
+            .then(() => {
+                Comment.findById(commentId)
+                    .orFail(() => Error('Not found'))
+                    .then(comment => {
+                        commentProps.thread = comment.thread;
+                    })
             })
             .then(() => Comment.create(commentProps))
             .then(comment => {
@@ -81,8 +92,15 @@ module.exports = {
 
         // This should error if the document is not found, but this seems to be a bug.
         // See: https://github.com/Automattic/mongoose/issues/7280
-        Comment.findOneAndUpdate(conditions, update)
-            .orFail(() => Error('Not found'))
+        const url = `${req.protocol}://${req.get('Host')}/api/users/${commentPropUser}`;
+
+        request.get(url)
+            .then((result) => {
+                if (result == "[]") {
+                    throw new Error('User does not exist.');
+                }
+            })
+            .then(Comment.findOneAndUpdate(conditions, update).orFail(() => Error('Not found')))
             .then(() => res.redirect('..'))
             .catch(next);
     },
@@ -109,8 +127,15 @@ module.exports = {
 
         // This should error if the document is not found, but this seems to be a bug.
         // See: https://github.com/Automattic/mongoose/issues/7280
-        Comment.findOneAndUpdate(conditions, update)
-            .orFail(() => Error('Not found'))
+        const url = `${req.protocol}://${req.get('Host')}/api/users/${commentPropUser}`;
+
+        request.get(url)
+            .then((result) => {
+                if (result == "[]") {
+                    throw new Error('User does not exist.');
+                }
+            })
+            .then(Comment.findOneAndUpdate(conditions, update).orFail(() => Error('Not found')))
             .then(() => res.redirect('..'))
             .catch(next);
     },

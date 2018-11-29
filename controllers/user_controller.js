@@ -68,7 +68,7 @@ module.exports = {
                 else {     
                     session.run('MATCH(u:user { username: $username}), (u:user {password: $password}) SET u.password = $newPassword RETURN u', params)
                         .then((result) => {  
-                            res.status(201).json(result);
+                            res.status(201).json(result.records);
                         }).catch(next)
                 }  
             })

@@ -1,7 +1,5 @@
 const Comment = require('../models/comment');
 
-//comment has content, user & reply
-
 module.exports = {
     read(req, res, next) {
         const commentId = req.params.id;

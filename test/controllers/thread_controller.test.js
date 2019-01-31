@@ -18,7 +18,6 @@ describe('Assessment of thread requirements', () => {
             .get('/api/threads/')
             .end((err, res) => {
                 res.should.have.status(201);
-
                 // TODO.
 
                 done();
@@ -43,7 +42,7 @@ describe('Assessment of thread requirements', () => {
                         done();
                     });
             })
-            .catch(next)
+            .catch()
 
     });
 });

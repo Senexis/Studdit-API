@@ -4,8 +4,8 @@ require('dotenv').config()
 const driver = neo4j.driver(
     process.env.neo4jUrl.toString(), 
     neo4j.auth.basic(
-        process.env.neo4jUser,
-        process.env.neo4jPwd
+        process.env.neo4jUsername,
+        process.env.neo4jPassword
     ));
 const session = driver.session(); // Define a global session here, so not every function needs to create one
 

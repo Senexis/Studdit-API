@@ -7,6 +7,7 @@ const app = require('../../app');
 const username = "User Test User";
 const password = "8080751807";
 const updatedPassword = "3642403665";
+const incorrectPassword = "0";
 
 chai.use(chaiHttp)
 describe('User API interface', () => {
@@ -54,6 +55,19 @@ describe('User API interface', () => {
                 done()
             })
     })
+    it('should fail to update a user with wrong password', function (done) {
+        chai.request(app)
+            .put('/api/users/' + username)
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send({
+                password: incorrectPassword,
+                newPassword: password
+            })
+            .end(function (err, res) {
+                res.should.have.status(401)
+                done()
+            })
+    })
     it('should update a user', function (done) {
         chai.request(app)
             .put('/api/users/' + username)
@@ -67,6 +81,18 @@ describe('User API interface', () => {
                 res.body.should.be.a('object')
                 res.text.should.contain(updatedPassword)
                 done()
+            })
+    })
+    it('should fail to delete a user with wrong password', function (done) {
+        chai.request(app)
+            .delete('/api/users/' + username)
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send({
+                password: incorrectPassword
+            })
+            .end(function (err, res) {
+                res.should.have.status(401);
+                done();
             })
     })
     it('should delete a user', function (done) {

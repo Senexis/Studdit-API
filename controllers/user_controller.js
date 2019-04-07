@@ -1,7 +1,4 @@
-const {
-    session,
-    neo4j
-} = require('../neodb');
+const { session } = require('../neodb');
 
 function getAsObjects(records) {
     return records.map(record => record.toObject({ forceJSNumbers: true }))
@@ -69,7 +66,7 @@ module.exports = {
         session.run('MATCH(u:user { username: $username}), (u:user {password: $password}) RETURN u.username AS username, u.password AS password LIMIT 1', params)
             .then((result) => {
                 if (!result.records[0]) {
-                    res.status(404).json({ "error": "Username or password is incorrect." })
+                    res.status(401).json({ "error": "Username or password is incorrect." })
                 } else {
                     session.run('MATCH(u:user { username: $username}), (u:user {password: $password}) SET u.password = $newPassword RETURN u.username AS username, u.password AS password LIMIT 1', params)
                         .then(result => {
@@ -93,7 +90,7 @@ module.exports = {
         session.run('MATCH(u:user { username: $username}), (u:user {password: $password}) RETURN u.username AS username, u.password AS password LIMIT 1', params)
             .then((result) => {
                 if (!result.records[0]) {
-                    res.status(404).json({ "error": "Username or password is incorrect." })
+                    res.status(401).json({ "error": "Username or password is incorrect." })
                 } else {
                     session.run('MATCH(u:user { username: $username }) DETACH DELETE u', params)
                         .then(_ => {

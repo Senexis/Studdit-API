@@ -1,7 +1,4 @@
-const {
-    session,
-    neo4j
-} = require('../neodb');
+const { session } = require('../neodb');
 
 module.exports = {
     create(req, res, next) {
@@ -11,17 +8,17 @@ module.exports = {
         }
 
         if (params.username === undefined || params.friendName === undefined) {
-            res.status(409).json("Please enter your username and a friend's name");
+            res.status(409).json({ "error": "Username or friend's username missing." });
         }
 
         session.run('MATCH (u:user {username: $username}), (f:user {username: $friendName}) return u', params)
             .then((result) => {
                 if (!result.records[0]) {
-                    res.status(409).json("username does not exist");
+                    res.status(409).json({ "error": "Username does not exist." });
                 } else {
                     session.run('MATCH (u:user {username: $username}), (f:user {username: $friendName}) MERGE (u)-[:Friends]-(f)', params)
-                        .then((result) => {
-                            res.status(201).json("Relationship successfully created!");
+                        .then(() => {
+                            res.status(201).json({ "message": "Relationship successfully created." });
                         })
                 }
             })
@@ -35,17 +32,17 @@ module.exports = {
         }
 
         if (params.username === undefined || params.friendName === undefined) {
-            res.status(409).json("Please enter your username and a friend's name");
+            res.status(409).json({ "error": "Username or friend's username missing." });
         }
 
         session.run('MATCH (u:user {username: $username}), (f:user {username: $friendName}) return u', params)
             .then((result) => {
                 if (!result.records[0]) {
-                    res.status(409).json("username does not exist");
+                    res.status(409).json({ "error": "Username does not exist." });
                 } else {
                     session.run('MATCH (u:user {username: $username})-[r:Friends]-(:user {username: $friendName}) DELETE r', params)
                         .then(() => {
-                            res.status(201).json("Relationship removed")
+                            res.status(201).json({ "message": "Relationship removed." })
                         }).catch(next);
                 }
             }).catch(next)

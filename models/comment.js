@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Thread = require('./thread');
 
 var schemaOptions = {
     toObject: {
@@ -54,6 +55,14 @@ var autoPopulateChildren = function (next) {
 CommentSchema
     .pre('findOne', autoPopulateChildren)
     .pre('find', autoPopulateChildren);
+
+CommentSchema.post('remove', function (next) {
+    Thread.updateMany({ _id: this.thread }, { $pullAll: { comments: [this._id] } })
+        .catch(next);
+
+    Comment.updateMany({ thread: this.thread }, { $pullAll: { comments: [this._id] } })
+        .catch(next);
+});
 
 CommentSchema.method('toJSON', function () {
     var comment = this.toObject();

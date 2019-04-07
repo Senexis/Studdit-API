@@ -57,7 +57,15 @@ describe('Thread API interface', () => {
             .get('/api/threads')
             .end(function (err, res) {
                 res.should.have.status(200)
-                res.body.should.be.a('array')
+                res.body.should.be.a('array');
+                //Checking for proper content in first element of thread list
+                res.body.should.have.any.keys(0, '_id');
+                res.body.should.have.any.keys(0, 'username');
+                res.body.should.have.any.keys(0, 'title');
+                res.body.should.have.any.keys(0, 'content');
+                res.body.should.have.any.keys(0, 'upvotesCount');
+                res.body.should.have.any.keys(0, 'downvotesCount');
+                res.body.should.have.any.keys(0, 'comments');
                 done()
             })
     })
@@ -110,6 +118,10 @@ describe('Thread API interface', () => {
                 res.body.should.be.a('object')
                 res.text.should.contain(title)
                 res.text.should.contain(content)
+
+                res.body.should.have.any.keys(0, '_id');
+                res.body.should.have.any.keys(0, 'comments')
+                res.body.should.have.any.keys(0, 0, 'username');
                 done()
             })
     })

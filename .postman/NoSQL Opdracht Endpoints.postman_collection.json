@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "78dcdfa0-879e-46cf-9bec-77cac4b6d62e",
+		"_postman_id": "74c96fe1-922c-4e1c-978d-cb4a45e79d0a",
 		"name": "NoSQL Opdracht Endpoints",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -81,7 +81,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa24206f082e2d486b61e9"
 						}
 					]
 				}
@@ -118,7 +118,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa24206f082e2d486b61e9"
 						}
 					]
 				}
@@ -148,7 +148,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa25026f082e2d486b61eb"
 						}
 					]
 				}
@@ -179,7 +179,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa24206f082e2d486b61e9"
 						}
 					]
 				}
@@ -217,7 +217,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa24206f082e2d486b61e9"
 						}
 					]
 				}
@@ -255,7 +255,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa24206f082e2d486b61e9"
 						}
 					]
 				}
@@ -293,7 +293,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa24206f082e2d486b61e9"
 						}
 					]
 				}
@@ -323,7 +323,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa4a95814b0d1cb090f635"
 						}
 					]
 				}
@@ -360,7 +360,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa4a95814b0d1cb090f635"
 						}
 					]
 				}
@@ -390,7 +390,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa25d26f082e2d486b61ec"
 						}
 					]
 				}
@@ -421,7 +421,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa4a95814b0d1cb090f635"
 						}
 					]
 				}
@@ -459,7 +459,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa4a95814b0d1cb090f635"
 						}
 					]
 				}
@@ -497,7 +497,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": ""
+							"value": "5caa25d26f082e2d486b61ec"
 						}
 					]
 				}
@@ -579,7 +579,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"username\": \"test_user\", \"password\": \"1234\"}"
+					"raw": "{\"username\": \"test_usr\", \"password\": \"1234\"}"
 				},
 				"url": {
 					"raw": "{{url_base}}/api/users/",
@@ -618,7 +618,7 @@
 					"variable": [
 						{
 							"key": "username",
-							"value": ""
+							"value": "test_user"
 						}
 					]
 				}
@@ -655,7 +655,7 @@
 					"variable": [
 						{
 							"key": "username",
-							"value": ""
+							"value": "test_user"
 						}
 					]
 				}
@@ -666,10 +666,17 @@
 			"name": "Users: DELETE",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\"password\": \"wrong\"}"
 				},
 				"url": {
 					"raw": "{{url_base}}/api/users/:username/",
@@ -685,12 +692,77 @@
 					"variable": [
 						{
 							"key": "username",
-							"value": ""
+							"value": "test_user",
+							"type": "text",
+							"enabled": true
 						}
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Users: DELETE",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url_base}}/api/users/:username/",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":username",
+								""
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": "test_user",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2d-i5Gs1Dulganlbp1Jux7ykOJn2UM\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 07 Apr 2019 16:17:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Please enter all required fields.\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Friendships: CREATE",
@@ -706,10 +778,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"username\": \"test_user\", \"friendname\": \"test_user_1\"}"
+					"raw": "{\"username\": \"test_user\", \"friendName\": \"test_usr\"}"
 				},
 				"url": {
-					"raw": "/api/friendships/",
+					"raw": "{{url_base}}/api/friendships/",
+					"host": [
+						"{{url_base}}"
+					],
 					"path": [
 						"api",
 						"friendships",
@@ -733,10 +808,13 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"username\": \"test_user\", \"friendname\": \"test_user_1\"}"
+					"raw": "{\"username\": \"test_user\", \"friendName\": \"test_usr\"}"
 				},
 				"url": {
-					"raw": "/api/friendships/",
+					"raw": "{{url_base}}/api/friendships/",
+					"host": [
+						"{{url_base}}"
+					],
 					"path": [
 						"api",
 						"friendships",
@@ -771,9 +849,16 @@
 	],
 	"variable": [
 		{
-			"id": "c656b5dd-1f52-4b53-a304-0cfedf6d2b1a",
+			"id": "96604b86-7082-48a5-8f8a-4bcacafe5fce",
 			"key": "url_base",
 			"value": "https://mighty-salt-32273.herokuapp.com",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "b4877450-70cf-40e3-be48-d5b72771c7ae",
+			"key": "url_base",
+			"value": "http://localhost:5000",
 			"type": "string"
 		}
 	]

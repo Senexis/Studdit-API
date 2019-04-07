@@ -3,19 +3,24 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const routes = require('./routes/routes');
-
 const app = express();
-//const mongodbUrl = 'mongodb://localhost/users-test'; // Local enviroment
-const mongodbUrl = 'mongodb://@ds117164.mlab.com:17164/studdit_db'; // live
 
 mongoose.Promise = global.Promise;
-mongoose.connect(mongodbUrl, {
-	useNewUrlParser: true,
-	auth: {
-		user: process.env.dbUsername,
-		password: process.env.pwd
-	}
-});
+
+if (process.env.mongoUseAuth == "true") {
+	mongoose.connect(process.env.mongoUrl, {
+		useNewUrlParser: true,
+		auth: {
+			user: process.env.mongoUsername,
+			password: process.env.mongoPassword
+		}
+	});
+} else {
+	mongoose.connect(process.env.mongoUrl, {
+		useNewUrlParser: true
+	});
+}
+
 var conn = mongoose.connection;
 conn.on('error', console.error.bind(console, 'MongoDB connection error:'));
 conn.once('open', () => {

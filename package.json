@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha ./test/controllers/*test.js ",
+    "test": "mocha ./test/**/*test.js --no-deprecation",
     "startmon": "nodemon ."
   },
   "author": "Timo Viveen, Wouter Jansen",

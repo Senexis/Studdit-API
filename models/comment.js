@@ -57,10 +57,10 @@ CommentSchema
     .pre('find', autoPopulateChildren);
 
 CommentSchema.post('remove', function (next) {
-    Thread.update({ _id: this.thread }, { $pullAll: { comments: [this._id] } })
+    Thread.updateMany({ _id: this.thread }, { $pullAll: { comments: [this._id] } })
         .catch(next);
 
-    Comment.update({ thread: this.thread }, { $pullAll: { comments: [this._id] } })
+    Comment.updateMany({ thread: this.thread }, { $pullAll: { comments: [this._id] } })
         .catch(next);
 });
 

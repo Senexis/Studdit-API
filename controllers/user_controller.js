@@ -1,7 +1,4 @@
-const {
-    session,
-    neo4j
-} = require('../neodb');
+const { session } = require('../neodb');
 
 function getAsObjects(records) {
     return records.map(record => record.toObject({ forceJSNumbers: true }))

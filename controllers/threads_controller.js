@@ -165,9 +165,10 @@ module.exports = {
     delete(req, res, next) {
         const threadId = req.params.id;
 
-        Thread.findByIdAndDelete(threadId)
+        Thread.findById(threadId)
             .orFail(() => Error('Not found'))
-            .then(thread => res.status(204).send(thread))
+            .then(thread => thread.remove())
+            .then(() => res.status(204).send({}))
             .catch(next);
     }
 };

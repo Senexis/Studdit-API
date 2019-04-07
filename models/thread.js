@@ -46,19 +46,16 @@ ThreadSchema.virtual('downvotesCount').get(function () {
     return this.downvotes.length;
 });
 
+ThreadSchema.post('remove', function(next) {
+    Comment.remove({ thread: this._id })
+        .catch(next);
+});
+
 ThreadSchema.method('toJSON', function () {
     var thread = this.toObject();
     delete thread.upvotes;
     delete thread.downvotes;
     return thread;
-});
-
-ThreadSchema.pre('remove', function (next) {
-    Comment.deleteMany({
-        thread: this._id
-    })
-        .exec()
-        .then(next);
 });
 
 const Thread = mongoose.model('thread', ThreadSchema);

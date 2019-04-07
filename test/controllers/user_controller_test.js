@@ -54,6 +54,19 @@ describe('User API interface', () => {
                 done()
             })
     })
+    it('should fail to update a user with wrong password', function (done) {
+        chai.request(app)
+            .put('/api/users/' + username)
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send({
+                password: updatedPassword,
+                newPassword: password
+            })
+            .end(function (err, res) {
+                res.should.have.status(401)
+                done()
+            })
+    })
     it('should update a user', function (done) {
         chai.request(app)
             .put('/api/users/' + username)

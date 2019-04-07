@@ -2,15 +2,10 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
 const expect = chai.expect();
-const {
-    session,
-    neo4j
-} = require('../../neodb');
 const app = require('../../app');
 
-const Thread = require('../../models/thread');
-
 let threadId;
+
 const username = "Thread Test User";
 const password = "9216517133";
 const nonExistingUsername = "Thread Test User X";
@@ -191,18 +186,18 @@ describe('Thread API interface', () => {
     })
     it('should change an upvote into a downvote on a thread', function (done) {
         chai.request(app)
-        .post('/api/threads/' + threadId + '/downvotes')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({
-            username: username,
-        })
-        .end(function (err, res) {
-            res.should.have.status(200)
-            res.body.should.be.a('object')
-            chai.expect(res.body.upvotesCount).to.equal(0)
-            chai.expect(res.body.downvotesCount).to.equal(1)
-            done()
-        })
+            .post('/api/threads/' + threadId + '/downvotes')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send({
+                username: username,
+            })
+            .end(function (err, res) {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+                chai.expect(res.body.upvotesCount).to.equal(0)
+                chai.expect(res.body.downvotesCount).to.equal(1)
+                done()
+            })
     })
     it('should ignore a duplicate downvote on a thread', function (done) {
         chai.request(app)
@@ -236,14 +231,14 @@ describe('Thread API interface', () => {
     })
     it('should get replies on a thread, including created one', function (done) {
         chai.request(app)
-        .get('/api/threads/' + threadId + '/comments')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .end(function (err, res) {
-            res.should.have.status(200)
-            res.body.should.be.a('object')
-            res.text.should.contain(commentContent)
-            done()
-        })
+            .get('/api/threads/' + threadId + '/comments')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .end(function (err, res) {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+                res.text.should.contain(commentContent)
+                done()
+            })
     })
     it('should delete a thread', function (done) {
         chai.request(app)

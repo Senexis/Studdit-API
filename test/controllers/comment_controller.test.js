@@ -2,22 +2,16 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
 const expect = chai.expect();
-const {
-    session,
-    neo4j
-} = require('../../neodb');
 const app = require('../../app');
 
 let threadId;
 let commentId;
-let replyId;
 
 const username = "Comment Test User";
 const password = "9216517133";
 const nonExistingUsername = "Comment Test User X";
 
 const title = "Comment Test Title";
-const updatedTitle = "Comment Test Title 2";
 const content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu rutrum risus.";
 const updatedContentTemplate = "Edit: Test.";
 const updatedContent = content + " " + updatedContentTemplate;
@@ -46,7 +40,7 @@ describe('Comment API interface', () => {
                         res.should.have.status(200);
                         res.body.should.have.property('username');
                         res.text.should.contain(username)
-                        
+
                         chai.request(app)
                             .post('/api/threads')
                             .set('content-type', 'application/x-www-form-urlencoded')
@@ -59,7 +53,7 @@ describe('Comment API interface', () => {
                                 res.should.have.status(200);
                                 res.body.should.have.property('_id');
                                 threadId = res.body._id;
-                                
+
                                 chai.request(app)
                                     .post('/api/threads/' + threadId + '/comments')
                                     .set('content-type', 'application/x-www-form-urlencoded')
@@ -225,18 +219,18 @@ describe('Comment API interface', () => {
     })
     it('should change an upvote into a downvote on a comment', function (done) {
         chai.request(app)
-        .post('/api/comments/' + commentId + '/downvotes')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({
-            username: username,
-        })
-        .end(function (err, res) {
-            res.should.have.status(200)
-            res.body.should.be.a('object')
-            chai.expect(res.body.upvotesCount).to.equal(0)
-            chai.expect(res.body.downvotesCount).to.equal(1)
-            done()
-        })
+            .post('/api/comments/' + commentId + '/downvotes')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send({
+                username: username,
+            })
+            .end(function (err, res) {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+                chai.expect(res.body.upvotesCount).to.equal(0)
+                chai.expect(res.body.downvotesCount).to.equal(1)
+                done()
+            })
     })
     it('should ignore a duplicate downvote on a comment', function (done) {
         chai.request(app)

@@ -37,17 +37,17 @@ module.exports = {
         if (params.username === undefined || params.friendName === undefined) {
             res.status(409).json("Please enter your username and a friend's name");
         }
-        
+
         session.run('MATCH (u:user {username: $username}), (f:user {username: $friendName}) return u', params)
             .then((result) => {
                 if (!result.records[0]) {
                     res.status(409).json("username does not exist");
                 } else {
                     session.run('MATCH (u:user {username: $username})-[r:Friends]-(:user {username: $friendName}) DELETE r', params)
-                    .then(() => {
-                        res.status(201).json("Relationship removed")
-                    }).catch(next);
+                        .then(() => {
+                            res.status(201).json("Relationship removed")
+                        }).catch(next);
                 }
             }).catch(next)
-        }
+    }
 };

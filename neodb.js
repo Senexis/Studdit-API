@@ -2,7 +2,7 @@ const neo4j = require('neo4j-driver').v1; //Making sure we always have the stabl
 require('dotenv').config()
 
 const driver = neo4j.driver(
-    process.env.neo4jUrl.toString(), 
+    process.env.neo4jUrl.toString(),
     neo4j.auth.basic(
         process.env.neo4jUsername,
         process.env.neo4jPassword

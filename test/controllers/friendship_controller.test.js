@@ -2,10 +2,6 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
 const expect = chai.expect();
-const {
-    session,
-    neo4j
-} = require('../../neodb');
 const app = require('../../app');
 
 const username = "Friend Test User 1";
@@ -63,7 +59,7 @@ describe("Friendship API interface", () => {
             })
             .end(function (err, res) {
                 res.should.have.status(204);
-                
+
                 chai.request(app)
                     .delete('/api/users/' + friendUsername)
                     .set('content-type', 'application/x-www-form-urlencoded')

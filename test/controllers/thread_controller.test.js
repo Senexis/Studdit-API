@@ -188,7 +188,7 @@ describe('Thread API interface', () => {
                 done()
             })
     })
-    it('should add change an upvote into a downvote on a thread', function (done) {
+    it('should change an upvote into a downvote on a thread', function (done) {
         chai.request(app)
         .post('/api/threads/' + threadId + '/downvotes')
         .set('content-type', 'application/x-www-form-urlencoded')

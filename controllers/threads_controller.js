@@ -122,8 +122,8 @@ module.exports = {
                     throw new Error('User does not exist.');
                 }
             })
-            .then(() => Thread.findOneAndUpdate(conditions, update).orFail(() => Error('Not found')))
-            .then(thread => res.redirect('..'))
+            .then(() => Thread.findOneAndUpdate(conditions, update, { new: true }).orFail(() => Error('Not found')))
+            .then(thread => res.send(thread))
             .catch(next);
     },
 
@@ -157,8 +157,8 @@ module.exports = {
                     throw new Error('User does not exist.');
                 }
             })
-            .then(Thread.findOneAndUpdate(conditions, update).orFail(() => Error('Not found')))
-            .then(thread => res.redirect('..'))
+            .then(() => Thread.findOneAndUpdate(conditions, update, { new: true }).orFail(() => Error('Not found')))
+            .then(thread => res.send(thread))
             .catch(next);
     },
 

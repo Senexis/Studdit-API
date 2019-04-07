@@ -146,6 +146,78 @@ describe('Thread API interface', () => {
                 done()
             })
     })
+    it('should require an existing user when upvoting a thread', function (done) {
+        chai.request(app)
+            .post('/api/threads/' + threadId + '/upvotes')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send({
+                username: nonExistingUsername,
+            })
+            .end(function (err, res) {
+                res.should.have.status(422)
+                done()
+            })
+    })
+    it('should add an upvote on a thread', function (done) {
+        chai.request(app)
+            .post('/api/threads/' + threadId + '/upvotes')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send({
+                username: username,
+            })
+            .end(function (err, res) {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+                chai.expect(res.body.upvotesCount).to.equal(1)
+                chai.expect(res.body.downvotesCount).to.equal(0)
+                done()
+            })
+    })
+    it('should ignore a duplicate upvote on a thread', function (done) {
+        chai.request(app)
+            .post('/api/threads/' + threadId + '/upvotes')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send({
+                username: username,
+            })
+            .end(function (err, res) {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+                chai.expect(res.body.upvotesCount).to.equal(1)
+                chai.expect(res.body.downvotesCount).to.equal(0)
+                done()
+            })
+    })
+    it('should add change an upvote into a downvote on a thread', function (done) {
+        chai.request(app)
+        .post('/api/threads/' + threadId + '/downvotes')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            username: username,
+        })
+        .end(function (err, res) {
+            res.should.have.status(200)
+            res.body.should.be.a('object')
+            chai.expect(res.body.upvotesCount).to.equal(0)
+            chai.expect(res.body.downvotesCount).to.equal(1)
+            done()
+        })
+    })
+    it('should ignore a duplicate downvote on a thread', function (done) {
+        chai.request(app)
+            .post('/api/threads/' + threadId + '/downvotes')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send({
+                username: username,
+            })
+            .end(function (err, res) {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+                chai.expect(res.body.upvotesCount).to.equal(0)
+                chai.expect(res.body.downvotesCount).to.equal(1)
+                done()
+            })
+    })
     it('should delete a thread', function (done) {
         chai.request(app)
             .delete('/api/threads/' + threadId)

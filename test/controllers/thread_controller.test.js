@@ -100,7 +100,7 @@ describe('Thread API interface', () => {
                 res.text.should.contain(title)
                 res.text.should.contain(content)
 
-                //Checking for proper content in first element of thread list
+                // Checking for proper content in first element of thread list
                 res.body.should.have.any.keys(0, '_id');
                 res.body.should.have.any.keys(0, 'username');
                 res.body.should.have.any.keys(0, 'title');

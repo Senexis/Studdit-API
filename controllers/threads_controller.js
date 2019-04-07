@@ -87,8 +87,8 @@ module.exports = {
                 "$push": {
                     comments: newCommentId
                 }
-            }))
-            .then(() => res.status(200).send('Success'))
+            }, { new: true }))
+            .then(() => res.redirect('/api/comments/' + newCommentId))
             .catch(next);
     },
 

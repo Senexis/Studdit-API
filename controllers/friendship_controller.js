@@ -17,7 +17,7 @@ module.exports = {
                     res.status(409).json({ "error": "Username does not exist." });
                 } else {
                     session.run('MATCH (u:user {username: $username}), (f:user {username: $friendName}) MERGE (u)-[:Friends]-(f)', params)
-                        .then((result) => {
+                        .then(() => {
                             res.status(201).json({ "message": "Relationship successfully created." });
                         })
                 }

@@ -44,7 +44,7 @@ module.exports = {
             content: req.body.content
         };
 
-        Thread.findByIdAndUpdate(threadId, threadProps, {new: true})
+        Thread.findByIdAndUpdate(threadId, threadProps, { new: true })
             .orFail(() => Error('Not found'))
             .then(thread => res.send(thread))
             .catch(next);

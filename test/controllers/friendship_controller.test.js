@@ -59,7 +59,7 @@ describe("Friendship API interface", () => {
             })
             .end(function (err, res) {
                 res.should.have.status(204);
-                
+
                 chai.request(app)
                     .delete('/api/users/' + friendUsername)
                     .set('content-type', 'application/x-www-form-urlencoded')

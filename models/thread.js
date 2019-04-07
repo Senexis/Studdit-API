@@ -55,8 +55,8 @@ ThreadSchema.method('toJSON', function () {
 
 ThreadSchema.pre('remove', function (next) {
     Comment.deleteMany({
-            thread: this._id
-        })
+        thread: this._id
+    })
         .exec()
         .then(next);
 });

@@ -17,7 +17,7 @@ module.exports = {
             content: req.body.content
         };
 
-        Comment.findByIdAndUpdate(commentId, commentProps)
+        Comment.findByIdAndUpdate(commentId, commentProps, { new: true })
             .orFail(() => Error('Not found'))
             .then(comment => res.send(comment))
             .catch(next);
@@ -29,7 +29,7 @@ module.exports = {
         Comment.findById(commentId)
             .populate('replies')
             .orFail(() => Error('Not found'))
-            .then(comment => res.send(comment))
+            .then(comment => res.send(comment.replies))
             .catch(next);
     },
 
@@ -65,7 +65,7 @@ module.exports = {
                             replies: newCommentId
                         }
                     }))
-                    .then(() => res.status(200).send('Success'))
+                    .then(() => res.redirect('/api/comments/' + newCommentId))
                     .catch(next);
             })
             .catch(next);
@@ -101,8 +101,8 @@ module.exports = {
                     throw new Error('User does not exist.');
                 }
             })
-            .then(Comment.findOneAndUpdate(conditions, update).orFail(() => Error('Not found')))
-            .then(() => res.redirect('..'))
+            .then(() => Comment.findOneAndUpdate(conditions, update, { new: true }).orFail(() => Error('Not found')))
+            .then(comment => res.send(comment))
             .catch(next);
     },
 
@@ -136,8 +136,8 @@ module.exports = {
                     throw new Error('User does not exist.');
                 }
             })
-            .then(Comment.findOneAndUpdate(conditions, update).orFail(() => Error('Not found')))
-            .then(() => res.redirect('..'))
+            .then(() => Comment.findOneAndUpdate(conditions, update, { new: true }).orFail(() => Error('Not found')))
+            .then(comment => res.send(comment))
             .catch(next);
     },
 

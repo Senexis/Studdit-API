@@ -20,6 +20,7 @@ const updatedTitle = "Thread Test Title 2";
 const content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu rutrum risus.";
 const updatedContentTemplate = "Edit: Test.";
 const updatedContent = content + " " + updatedContentTemplate;
+const commentContent = "Very nice!";
 
 chai.use(chaiHttp)
 describe('Thread API interface', () => {
@@ -217,6 +218,32 @@ describe('Thread API interface', () => {
                 chai.expect(res.body.downvotesCount).to.equal(1)
                 done()
             })
+    })
+    it('should add a reply on a thread', function (done) {
+        chai.request(app)
+            .post('/api/threads/' + threadId + '/comments')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send({
+                username: username,
+                content: commentContent,
+            })
+            .end(function (err, res) {
+                res.should.have.status(200)
+                res.body.should.be.a('object')
+                res.text.should.contain(commentContent)
+                done()
+            })
+    })
+    it('should get replies on a thread, including created one', function (done) {
+        chai.request(app)
+        .get('/api/threads/' + threadId + '/comments')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .end(function (err, res) {
+            res.should.have.status(200)
+            res.body.should.be.a('object')
+            res.text.should.contain(commentContent)
+            done()
+        })
     })
     it('should delete a thread', function (done) {
         chai.request(app)

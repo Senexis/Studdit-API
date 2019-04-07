@@ -82,6 +82,18 @@ describe('User API interface', () => {
                 done()
             })
     })
+    it('should fail to delete a user', function (done) {
+        chai.request(app)
+            .delete('/api/users/' + username)
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send({
+                password: 'wrongPassword'
+            })
+            .end(function (err, res) {
+                res.should.have.status(401);
+                done();
+            })
+    })
     it('should delete a user', function (done) {
         chai.request(app)
             .delete('/api/users/' + username)

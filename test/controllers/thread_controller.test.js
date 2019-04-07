@@ -2,15 +2,10 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
 const expect = chai.expect();
-const {
-    session,
-    neo4j
-} = require('../../neodb');
 const app = require('../../app');
 
-const Thread = require('../../models/thread');
-
 let threadId;
+
 const username = "Thread Test User";
 const password = "9216517133";
 const nonExistingUsername = "Thread Test User X";

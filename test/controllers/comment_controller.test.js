@@ -2,22 +2,16 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
 const expect = chai.expect();
-const {
-    session,
-    neo4j
-} = require('../../neodb');
 const app = require('../../app');
 
 let threadId;
 let commentId;
-let replyId;
 
 const username = "Comment Test User";
 const password = "9216517133";
 const nonExistingUsername = "Comment Test User X";
 
 const title = "Comment Test Title";
-const updatedTitle = "Comment Test Title 2";
 const content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu rutrum risus.";
 const updatedContentTemplate = "Edit: Test.";
 const updatedContent = content + " " + updatedContentTemplate;

@@ -1,10 +1,7 @@
-# NoSQL Opdracht | Online forum Studdit
+# Studdit API
+Studdit is an online student form based on Reddit, effectively being a Reddit clone. The endpoints list show below previews the functionality the API has. This API was made for a school assignment and was made using NoSQL.
 
-# Links
- - Heroku: https://mighty-salt-32273.herokuapp.com/
-
-# Endpoint list
- 
+## Endpoint list
 ### Thread endpoints
     GET:    /api/threads
     POST:   /api/threads
